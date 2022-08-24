@@ -1,0 +1,22 @@
+openapi: 3.0.3
+info:
+  title: Weather
+  description: |-
+    This is a back-end to check the weather.
+  contact:
+    email: mfranchi@fi.uba.ar
+  version: 0.1.0
+externalDocs:
+  description: Find out more about Weather checker
+  url: https://github.com/EugeniaFranchi/weather-back
+tags:
+  - name: weather
+    description: Everything about the weather
+paths:
+  /v1:
+    get:
+      tags: [weather]
+      description: Base endpoint
+      responses:
+        '200':
+          description: Successful response
