@@ -12,6 +12,7 @@ WEATHER_URL = <url de Open Weather Map>
 BASE_ROUTE = <ruta base>
 WEATHER_API_KEY = <api key de Open Weather Map>
 PORT = <puerto de la api>
+NODE_ENV = <'develop'/'main'>
 ```
 
 ## Para ejecutar

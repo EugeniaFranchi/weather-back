@@ -3,12 +3,14 @@ import dotenv from 'dotenv'
 dotenv.config({ path: './.env' })
 
 const server = build({
-  logger: {
-    level: 'info',
-    transport: {
-      target: 'pino-pretty'
-    }
-  }
+  logger: process.env.NODE_ENV === 'develop'
+    ? {
+        level: 'info',
+        transport: {
+          target: 'pino-pretty'
+        }
+      }
+    : false
 })
 
 server.listen({ port: process.env.PORT }, (err, address) => {
