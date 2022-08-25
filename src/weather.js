@@ -14,7 +14,7 @@ class Weather {
     })
     const url = `${this.ip_api}/weather?` + params
 
-    const data = await fetch(url, { method: 'POST' })
+    const data = await fetch(url)
       .then((response) => { return response.json() })
     return data
   }
