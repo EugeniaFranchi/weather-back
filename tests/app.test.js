@@ -79,4 +79,16 @@ describe('Current: /current', () => {
     expect(JSON.parse(response.body).current).toHaveProperty('weather')
     expect(JSON.parse(response.body).current).toHaveProperty('main')
   })
+
+  test('invalid city', async () => {
+    const app = build()
+    const invalidCity = 'Neverland'
+
+    const response = await app.inject({
+      method: 'GET',
+      url: `${process.env.BASE_ROUTE}/current/${invalidCity}`
+    })
+
+    expect(response.statusCode).toBe(500)
+  })
 })

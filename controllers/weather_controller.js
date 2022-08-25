@@ -28,6 +28,7 @@ const getCurrent = async (req, res, next) => {
   const clientCity = req.params.city
   const city = await locator.getCurrentCity(clientIp, clientCity)
   const current = await weather.getCurrentWeather(city)
+  if (current.cod === '404') { res.status(500) }
   const body = { city, current }
   res.send(body)
 }
