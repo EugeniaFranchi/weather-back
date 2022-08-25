@@ -24,4 +24,14 @@ describe('Locator', () => {
 
     expect(city).toBe(expectedCity)
   })
+
+  test('gets current city without city name', async () => {
+    const locator = new Locator()
+    const ipViedma = '45.5.0.0'
+    const expectedCity = 'Viedma'
+
+    const city = await locator.getCurrentCity(ipViedma)
+
+    expect(city).toBe(expectedCity)
+  })
 })

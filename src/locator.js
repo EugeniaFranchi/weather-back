@@ -13,8 +13,8 @@ class Locator {
     return data
   }
 
-  async getCurrentCity (ip, city) {
-    return city
+  async getCurrentCity (ip, city = '') {
+    return city || (await this.getLocation(ip)).city
   }
 }
 
