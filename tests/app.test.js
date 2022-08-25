@@ -46,3 +46,22 @@ describe('Location: /location', () => {
     spy.mockRestore()
   })
 })
+
+describe('Current: /current', () => {
+  test('gets the current weather', async () => {
+    const app = build()
+    const expectedCity = 'Viedma'
+
+    const response = await app.inject({
+      method: 'GET',
+      url: `${process.env.BASE_ROUTE}/current/${expectedCity}`
+    })
+
+    expect(response.statusCode).toBe(200)
+    expect(JSON.parse(response.body)).toHaveProperty('city')
+    expect(JSON.parse(response.body).city).toBe(expectedCity)
+    expect(JSON.parse(response.body)).toHaveProperty('current')
+    expect(JSON.parse(response.body).current).toHaveProperty('weather')
+    expect(JSON.parse(response.body).current).toHaveProperty('main')
+  })
+})
