@@ -27,6 +27,15 @@ const getCurrent = async (req, res, next) => {
   res.send(body)
 }
 
+const getForecast = async (req, res, next) => {
+  const clientIp = await getIp(req)
+  const clientCity = req.params.city
+  const city = await locator.getCurrentCity(clientIp, clientCity)
+  const forecast = await weather.getForecast(city)
+  const body = { city, forecast }
+  res.send(body)
+}
+
 const getIp = async (req) => {
   let clientIp = req.socket.remoteAddress
   if (ip.isPrivate(clientIp)) {
@@ -38,5 +47,6 @@ const getIp = async (req) => {
 export {
   getBaseEndpoint,
   getLocation,
-  getCurrent
+  getCurrent,
+  getForecast
 }
