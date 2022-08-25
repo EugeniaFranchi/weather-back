@@ -20,3 +20,29 @@ paths:
       responses:
         '200':
           description: Successful response
+  /v1/location:
+    get:
+      tags: [weather]
+      description: Returns the location of the client by it's IP
+      responses:
+        '200':
+          description: Successful response
+        '500':
+          description: Location not found
+  /v1/current/{city}:
+    get:
+      tags: [weather]
+      description: Returns the current weather of the location client. 
+                    If 'city' is specified, it returns the weather in that city.
+      parameters:
+        - in: path
+          name: city
+          schema:
+            type: string
+          required: false
+          description: Name of a city
+      responses:
+        '200':
+          description: Successful response
+        '500':
+          description: Location not found
