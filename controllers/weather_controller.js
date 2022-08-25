@@ -21,7 +21,10 @@ const getLocation = async (req, res, next) => {
 }
 
 const getCurrent = async (req, res, next) => {
-  const clientIp = req.socket.remoteAddress
+  let clientIp = req.socket.remoteAddress
+  if (ip.isPrivate(clientIp)) {
+    clientIp = await extIP().get().then(ip => { return ip })
+  }
   const clientCity = req.params.city
   const city = await locator.getCurrentCity(clientIp, clientCity)
   const current = await weather.getCurrentWeather(city)

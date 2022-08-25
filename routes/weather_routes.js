@@ -9,6 +9,7 @@ const routes = (app, options) => {
     instance.get('/', getBaseEndpoint)
     instance.get('/location', getLocation)
     instance.get('/current/:city', getCurrent)
+    instance.get('/current', getCurrent)
 
     next()
   }, options)

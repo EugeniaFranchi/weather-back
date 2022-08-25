@@ -48,7 +48,7 @@ describe('Location: /location', () => {
 })
 
 describe('Current: /current', () => {
-  test('gets the current weather', async () => {
+  test('gets the current weather with city', async () => {
     const app = build()
     const expectedCity = 'Viedma'
 
@@ -60,6 +60,21 @@ describe('Current: /current', () => {
     expect(response.statusCode).toBe(200)
     expect(JSON.parse(response.body)).toHaveProperty('city')
     expect(JSON.parse(response.body).city).toBe(expectedCity)
+    expect(JSON.parse(response.body)).toHaveProperty('current')
+    expect(JSON.parse(response.body).current).toHaveProperty('weather')
+    expect(JSON.parse(response.body).current).toHaveProperty('main')
+  })
+
+  test('gets the current weather without city', async () => {
+    const app = build()
+
+    const response = await app.inject({
+      method: 'GET',
+      url: `${process.env.BASE_ROUTE}/current`
+    })
+
+    expect(response.statusCode).toBe(200)
+    expect(JSON.parse(response.body)).toHaveProperty('city')
     expect(JSON.parse(response.body)).toHaveProperty('current')
     expect(JSON.parse(response.body).current).toHaveProperty('weather')
     expect(JSON.parse(response.body).current).toHaveProperty('main')
