@@ -110,4 +110,19 @@ describe('Forecast: /current', () => {
     expect(JSON.parse(response.body).forecast).toHaveProperty('list')
     expect(JSON.parse(response.body).forecast.list[0]).toHaveProperty('weather')
   })
+
+  test('gets forecast without city', async () => {
+    const app = build()
+
+    const response = await app.inject({
+      method: 'GET',
+      url: `${process.env.BASE_ROUTE}/forecast`
+    })
+
+    expect(response.statusCode).toBe(200)
+    expect(JSON.parse(response.body)).toHaveProperty('city')
+    expect(JSON.parse(response.body)).toHaveProperty('forecast')
+    expect(JSON.parse(response.body).forecast).toHaveProperty('list')
+    expect(JSON.parse(response.body).forecast.list[0]).toHaveProperty('weather')
+  })
 })
