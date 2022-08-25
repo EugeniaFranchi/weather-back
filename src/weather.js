@@ -5,14 +5,16 @@ dotenv.config({ path: './.env' })
 class Weather {
   constructor () {
     this.ip_api = process.env.WEATHER_URL
+    this.endpoint_current = 'weather'
+    this.endpoint_forecast = 'forecast'
   }
 
   async getCurrentWeather (city) {
-    return await this.getWeather ('weather', city)
+    return await this.getWeather(this.endpoint_current, city)
   }
 
   async getForecast (city) {
-    return await this.getWeather ('forecast', city)
+    return await this.getWeather(this.endpoint_forecast, city)
   }
 
   async getWeather (endpoint, city) {
