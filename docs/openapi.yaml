@@ -32,8 +32,25 @@ paths:
   /v1/current/{city}:
     get:
       tags: [weather]
-      description: Returns the current weather of the location client. 
+      description: Returns the current weather of the client's location. 
                     If 'city' is specified, it returns the weather in that city.
+      parameters:
+        - in: path
+          name: city
+          schema:
+            type: string
+          required: false
+          description: Name of a city
+      responses:
+        '200':
+          description: Successful response
+        '500':
+          description: Location not found
+  /v1/forecast/{city}:
+    get:
+      tags: [weather]
+      description: Returns the forecast for the client's location. 
+                    If 'city' is specified, it returns the forecast in that city.
       parameters:
         - in: path
           name: city
