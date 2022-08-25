@@ -18,6 +18,18 @@ class Weather {
       .then((response) => { return response.json() })
     return data
   }
+
+  async getForecast (city) {
+    const params = new URLSearchParams({
+      q: city,
+      appid: process.env.WEATHER_API_KEY
+    })
+    const url = `${this.ip_api}/forecast?` + params
+
+    const data = await fetch(url)
+      .then((response) => { return response.json() })
+    return data
+  }
 }
 
 export default Weather
