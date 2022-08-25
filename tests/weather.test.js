@@ -1,4 +1,5 @@
 import build from '../src/app.js'
+import ip from 'ip'
 import dotenv from 'dotenv'
 dotenv.config({ path: './.env' })
 
@@ -30,5 +31,18 @@ describe('Location: /location', () => {
     expect(JSON.parse(response.body)).toHaveProperty('country')
     expect(JSON.parse(response.body)).toHaveProperty('lat')
     expect(JSON.parse(response.body)).toHaveProperty('lon')
+  })
+
+  test('invalid location', async () => {
+    const app = build()
+    const spy = jest.spyOn(ip, 'isPrivate').mockImplementation(() => false)
+
+    const response = await app.inject({
+      method: 'GET',
+      url: `${process.env.BASE_ROUTE}/location`
+    })
+
+    expect(response.statusCode).toBe(500)
+    spy.mockRestore()
   })
 })

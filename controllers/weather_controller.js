@@ -1,4 +1,5 @@
 import Locator from '../src/locator.js'
+import ip from 'ip'
 import extIP from 'ext-ip'
 
 const locator = new Locator()
@@ -9,8 +10,11 @@ const getBaseEndpoint = async (req, res, next) => {
 
 const getLocation = async (req, res, next) => {
   let clientIp = req.socket.remoteAddress
-  clientIp = await extIP().get().then(ip => { return ip })
+  if (ip.isPrivate(clientIp)) {
+    clientIp = await extIP().get().then(ip => { return ip })
+  }
   const body = await locator.getLocation(clientIp)
+  if (body.status === 'fail') { res.status(500) }
   res.send(body)
 }
 
