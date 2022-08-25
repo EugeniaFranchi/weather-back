@@ -12,6 +12,10 @@ class Locator {
     const data = await fetch(url).then((response) => { return response.json() })
     return data
   }
+
+  async getCurrentCity (ip, city) {
+    return city
+  }
 }
 
 export default Locator
