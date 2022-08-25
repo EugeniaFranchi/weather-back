@@ -11,6 +11,7 @@ IP_API_URL = <url de ip-api>
 WEATHER_URL = <url de Open Weather Map>
 BASE_ROUTE = <ruta base>
 WEATHER_API_KEY = <api key de Open Weather Map>
+PORT = <puerto de la api>
 ```
 
 ## Para ejecutar
