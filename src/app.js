@@ -1,11 +1,12 @@
 import Fastify from 'fastify'
-import { getBaseEndpoint } from '../controllers/weather_controller.js'
 import swagger from '@fastify/swagger'
+import routes from '../routes/weather_routes.js'
+import dotenv from 'dotenv'
+dotenv.config({ path: './.env' })
 
-const baseRoute = '/v1'
 const openapiOptions = {
   mode: 'static',
-  routePrefix: `${baseRoute}/openapi`,
+  routePrefix: `${process.env.BASE_ROUTE}/openapi`,
   specification: {
     path: './docs/openapi.yaml'
   },
@@ -15,8 +16,7 @@ const openapiOptions = {
 const build = (options = {}) => {
   const app = Fastify(options)
   app.register(swagger, openapiOptions)
-
-  app.get(baseRoute, getBaseEndpoint)
+  routes(app, { prefix: process.env.BASE_ROUTE })
 
   return app
 }
