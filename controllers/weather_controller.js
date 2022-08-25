@@ -18,9 +18,7 @@ const getLocation = async (req, res, next) => {
 }
 
 const getCurrent = async (req, res, next) => {
-  const clientIp = await getIp(req)
-  const clientCity = req.params.city
-  const city = await locator.getCurrentCity(clientIp, clientCity)
+  const city = await getCity(req)
   const current = await weather.getCurrentWeather(city)
   if (current.cod === '404') { res.status(500) }
   const body = { city, current }
@@ -28,9 +26,7 @@ const getCurrent = async (req, res, next) => {
 }
 
 const getForecast = async (req, res, next) => {
-  const clientIp = await getIp(req)
-  const clientCity = req.params.city
-  const city = await locator.getCurrentCity(clientIp, clientCity)
+  const city = await getCity(req)
   const forecast = await weather.getForecast(city)
   if (forecast.cod === '404') { res.status(500) }
   const body = { city, forecast }
@@ -43,6 +39,13 @@ const getIp = async (req) => {
     clientIp = await extIP().get().then(ip => { return ip })
   }
   return clientIp
+}
+
+const getCity = async (req) => {
+  const clientIp = await getIp(req)
+  const clientCity = req.params.city
+  const city = await locator.getCurrentCity(clientIp, clientCity)
+  return city
 }
 
 export {
