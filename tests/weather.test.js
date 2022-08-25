@@ -18,13 +18,13 @@ describe('Weather', () => {
     const locator = new Weather()
     const city = 'Viedma'
 
-    const current = await locator.getForecast(city)
+    const forecast = await locator.getForecast(city)
 
-    expect(current).toHaveProperty('list')
-    expect(current.list[0]).toHaveProperty('weather')
-    expect(current.list[0]).toHaveProperty('main')
-    expect(current.list[0]).toHaveProperty('visibility')
-    expect(current.list[0]).toHaveProperty('wind')
-    expect(current.list[0]).toHaveProperty('clouds')
+    expect(forecast).toHaveProperty('list')
+    expect(forecast.list[0]).toHaveProperty('weather')
+    expect(forecast.list[0]).toHaveProperty('main')
+    expect(forecast.list[0]).toHaveProperty('visibility')
+    expect(forecast.list[0]).toHaveProperty('wind')
+    expect(forecast.list[0]).toHaveProperty('clouds')
   })
 })
