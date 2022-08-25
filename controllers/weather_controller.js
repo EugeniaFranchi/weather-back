@@ -11,26 +11,28 @@ const getBaseEndpoint = async (req, res, next) => {
 }
 
 const getLocation = async (req, res, next) => {
-  let clientIp = req.socket.remoteAddress
-  if (ip.isPrivate(clientIp)) {
-    clientIp = await extIP().get().then(ip => { return ip })
-  }
+  const clientIp = await getIp(req)
   const body = await locator.getLocation(clientIp)
   if (body.status === 'fail') { res.status(500) }
   res.send(body)
 }
 
 const getCurrent = async (req, res, next) => {
-  let clientIp = req.socket.remoteAddress
-  if (ip.isPrivate(clientIp)) {
-    clientIp = await extIP().get().then(ip => { return ip })
-  }
+  const clientIp = await getIp(req)
   const clientCity = req.params.city
   const city = await locator.getCurrentCity(clientIp, clientCity)
   const current = await weather.getCurrentWeather(city)
   if (current.cod === '404') { res.status(500) }
   const body = { city, current }
   res.send(body)
+}
+
+const getIp = async (req) => {
+  let clientIp = req.socket.remoteAddress
+  if (ip.isPrivate(clientIp)) {
+    clientIp = await extIP().get().then(ip => { return ip })
+  }
+  return clientIp
 }
 
 export {
