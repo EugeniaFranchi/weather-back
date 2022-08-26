@@ -7,11 +7,14 @@ describe('Weather', () => {
 
     const current = await locator.getCurrentWeather(city)
 
-    expect(current).toHaveProperty('weather')
-    expect(current).toHaveProperty('main')
-    expect(current).toHaveProperty('visibility')
-    expect(current).toHaveProperty('wind')
-    expect(current).toHaveProperty('clouds')
+    expect(current).toHaveProperty('city')
+    expect(current.city).toHaveProperty('name')
+    expect(current.city).toHaveProperty('country')
+    expect(current.city).toHaveProperty('coord')
+    expect(current).toHaveProperty('current')
+    expect(current.current).toHaveProperty('weather')
+    expect(current.current).toHaveProperty('main')
+    expect(current.current).toHaveProperty('wind')
   })
 
   test('gets forecast of Viedma', async () => {

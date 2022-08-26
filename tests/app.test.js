@@ -59,7 +59,7 @@ describe('Current: /current', () => {
 
     expect(response.statusCode).toBe(200)
     expect(JSON.parse(response.body)).toHaveProperty('city')
-    expect(JSON.parse(response.body).city).toBe(expectedCity)
+    expect(JSON.parse(response.body).city.name).toBe(expectedCity)
     expect(JSON.parse(response.body)).toHaveProperty('current')
     expect(JSON.parse(response.body).current).toHaveProperty('weather')
     expect(JSON.parse(response.body).current).toHaveProperty('main')
@@ -75,6 +75,7 @@ describe('Current: /current', () => {
 
     expect(response.statusCode).toBe(200)
     expect(JSON.parse(response.body)).toHaveProperty('city')
+    expect(JSON.parse(response.body).city).toHaveProperty('name')
     expect(JSON.parse(response.body)).toHaveProperty('current')
     expect(JSON.parse(response.body).current).toHaveProperty('weather')
     expect(JSON.parse(response.body).current).toHaveProperty('main')

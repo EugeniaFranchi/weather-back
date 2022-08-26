@@ -20,8 +20,10 @@ const getLocation = async (req, res, next) => {
 const getCurrent = async (req, res, next) => {
   const city = await getCity(req)
   const current = await weather.getCurrentWeather(city)
-  if (current.cod === '404') { res.status(500) }
-  const body = { city, current }
+  if (current.current.cod === '404') {
+    res.status(500)
+  }
+  const body = current
   res.send(body)
 }
 
