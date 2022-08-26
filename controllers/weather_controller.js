@@ -23,16 +23,14 @@ const getCurrent = async (req, res, next) => {
   if (current.current.cod === '404') {
     res.status(500)
   }
-  const body = current
-  res.send(body)
+  res.send(current)
 }
 
 const getForecast = async (req, res, next) => {
   const city = await getCity(req)
   const forecast = await weather.getForecast(city)
-  if (forecast.cod === '404') { res.status(500) }
-  const body = { city, forecast }
-  res.send(body)
+  if (forecast.forecast.cod === '404') { res.status(500) }
+  res.send(forecast)
 }
 
 const getIp = async (req) => {

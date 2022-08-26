@@ -94,7 +94,7 @@ describe('Current: /current', () => {
   })
 })
 
-describe('Forecast: /current', () => {
+describe('Forecast: /forecast', () => {
   test('gets forecast with city', async () => {
     const app = build()
     const expectedCity = 'Viedma'
@@ -106,7 +106,7 @@ describe('Forecast: /current', () => {
 
     expect(response.statusCode).toBe(200)
     expect(JSON.parse(response.body)).toHaveProperty('city')
-    expect(JSON.parse(response.body).city).toBe(expectedCity)
+    expect(JSON.parse(response.body).city.name).toBe(expectedCity)
     expect(JSON.parse(response.body)).toHaveProperty('forecast')
     expect(JSON.parse(response.body).forecast).toHaveProperty('list')
     expect(JSON.parse(response.body).forecast.list[0]).toHaveProperty('weather')
