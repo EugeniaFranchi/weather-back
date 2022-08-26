@@ -34,7 +34,7 @@ npm run eslint
 Los siguientes son los endpoints de la aplicación:
 ### /v1
 Ruta base.
-### /v1/openapi
+### /openapi
 Muestra la documentación de la API.
 ### /location
 Devuelve los datos de ubicación city según ip-api.
