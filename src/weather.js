@@ -1,6 +1,6 @@
 import fetch from 'node-fetch'
 import dotenv from 'dotenv'
-import WeatherParser from './weather_parser'
+import WeatherParser from './weather_parser.js'
 dotenv.config({ path: './.env' })
 
 class Weather {
