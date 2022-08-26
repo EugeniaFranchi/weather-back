@@ -34,4 +34,16 @@ describe('Locator', () => {
 
     expect(city).toBe(expectedCity)
   })
+
+  test('gets location with no extra information', async () => {
+    const locator = new Locator()
+    const ipViedma = '45.5.0.0'
+
+    const location = await locator.getLocation(ipViedma)
+
+    expect(location).not.toHaveProperty('isp')
+    expect(location).not.toHaveProperty('org')
+    expect(location).not.toHaveProperty('as')
+    expect(location).not.toHaveProperty('query')
+  })
 })
