@@ -27,6 +27,34 @@ paths:
       responses:
         '200':
           description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  city:
+                    type: object
+                    properties:
+                      status:
+                        type: string
+                      country:
+                        type: string
+                      countryCode:
+                        type: string
+                      region:
+                        type: string
+                      regionName:
+                        type: string
+                      city:
+                        type: string
+                      zip:
+                        type: string
+                      lat:
+                        type: integer
+                      lon:
+                        type: integer
+                      timezone:
+                        type: string
         '500':
           description: Location not found
   /v1/current/{city}:
@@ -44,6 +72,95 @@ paths:
       responses:
         '200':
           description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  city:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      country:
+                        type: string
+                      coord:
+                        type: object
+                        properties:
+                          lat:
+                            type: integer
+                          lon:
+                            type: integer
+                      timezone:
+                        type: integer
+                  current:
+                    type: object
+                    properties:
+                      weather:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            main:
+                              type: string
+                            description:
+                              type: string
+                            icon:
+                              type: string
+                      base:
+                        type: string
+                      main:
+                        type: object
+                        properties:
+                          temp:
+                            type: number
+                          feels_like:
+                            type: number
+                          temp_min:
+                            type: number
+                          temp_max:
+                            type: number
+                          pressure:
+                            type: integer
+                          humidity:
+                            type: integer
+                          sea_level:
+                            type: integer
+                          grnd_level:
+                            type: integer
+                      visibility:
+                        type: integer
+                      wind:
+                        type: object
+                        properties:
+                          speed:
+                            type: number
+                          deg:
+                            type: integer
+                          gust:
+                            type: number
+                      clouds:
+                        type: object
+                        properties:
+                          all:
+                            type: integer
+                      dt:
+                        type: integer
+                      sys:
+                        type: object
+                        properties:
+                          country:
+                            type: string
+                          sunrise:
+                            type: integer
+                          sunset:
+                            type: integer
+                      cod:
+                        type: integer
         '500':
           description: Location not found
   /v1/forecast/{city}:
@@ -61,5 +178,101 @@ paths:
       responses:
         '200':
           description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  city:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      country:
+                        type: string
+                      coord:
+                        type: object
+                        properties:
+                          lat:
+                            type: integer
+                          lon:
+                            type: integer
+                      timezone:
+                        type: integer
+                  forecast:
+                    type: object
+                    properties:
+                      message:
+                        type: integer
+                      cnt:
+                        type: integer
+                      list:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            dt:
+                              type: integer
+                            main:
+                              type: object
+                              properties:
+                                temp:
+                                  type: number
+                                feels_like:
+                                  type: number
+                                temp_min:
+                                  type: number
+                                temp_max:
+                                  type: number
+                                pressure:
+                                  type: integer
+                                humidity:
+                                  type: integer
+                                sea_level:
+                                  type: integer
+                                grnd_level:
+                                  type: integer
+                                temp_kf:
+                                  type: number
+                            weather:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: integer
+                                  main:
+                                    type: string
+                                  description:
+                                    type: string
+                                  icon:
+                                    type: string
+                            clouds:
+                              type: object
+                              properties:
+                                all:
+                                  type: integer
+                            wind:
+                              type: object
+                              properties:
+                                speed:
+                                  type: number
+                                deg:
+                                  type: integer
+                                gust:
+                                  type: number
+                            visibility:
+                              type: integer
+                            pop:
+                              type: string
+                            sys:
+                              type: object
+                              properties:
+                                pod:
+                                  type: string
+                            dt_txt:
+                              type: string
         '500':
           description: Location not found
